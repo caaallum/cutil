@@ -1,0 +1,39 @@
+cmake_minimum_required(VERSION 3.16)
+
+set(VERSION 0.1.0)
+
+project(cutil)
+
+file(GLOB
+    SRC
+    src/map.c
+    src/vector.c
+)
+
+file(GLOB
+    PUBLIC_HEADERS
+    include/cutil.h
+)
+
+file(GLOB
+    PRIVATE_HEADERS
+    include/cutil/map.h
+    include/cutil/vector.h
+)
+
+add_library(${PROJECT_NAME} ${SRC})
+
+target_include_directories(${PROJECT_NAME} PRIVATE include)
+
+include(CMakePackageConfigHelpers)
+write_basic_package_version_file(
+    cutil.cmake
+    VERSION ${VERSION}
+    COMPATIBILITY AnyNewerVersion
+)
+
+install(FILES ${PUBLIC_HEADERS} DESTINATION "include/")
+install(FILES ${PRIVATE_HEADERS} DESTINATION "include/cutil")
+install(TARGETS ${PROJECT_NAME} 
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+)
