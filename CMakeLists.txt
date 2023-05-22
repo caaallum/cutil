@@ -1,13 +1,17 @@
 cmake_minimum_required(VERSION 3.16)
 
 set(VERSION 0.1.0)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 project(cutil)
+
+option(CUTIL_TESTS "Enable testing" ON)
 
 file(GLOB
     SRC
     src/map.c
     src/vector.c
+    src/string.c
 )
 
 file(GLOB
@@ -19,6 +23,7 @@ file(GLOB
     PRIVATE_HEADERS
     include/cutil/map.h
     include/cutil/vector.h
+    include/cutil/string.h
 )
 
 add_library(${PROJECT_NAME} ${SRC})
@@ -37,3 +42,7 @@ install(FILES ${PRIVATE_HEADERS} DESTINATION "include/cutil")
 install(TARGETS ${PROJECT_NAME} 
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
 )
+
+if(CUTIL_TESTS)
+    add_subdirectory(check)
+endif()
