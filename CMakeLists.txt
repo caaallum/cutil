@@ -12,6 +12,7 @@ file(GLOB
     src/map.c
     src/vector.c
     src/string.c
+    src/stack.c
 )
 
 file(GLOB
@@ -24,6 +25,7 @@ file(GLOB
     include/cutil/map.h
     include/cutil/vector.h
     include/cutil/string.h
+    include/cutil/stack.h
 )
 
 add_library(${PROJECT_NAME} ${SRC})
