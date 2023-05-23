@@ -11,7 +11,7 @@ FetchContent_MakeAvailable(check)
 
 add_custom_target(test
     COMMAND ctest
-    DEPENDS check_map check_vector check_string
+    DEPENDS check_map check_vector check_string check_stack
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/check
 )
 
@@ -28,3 +28,4 @@ endmacro()
 cutil_add_test(check_map check_map.c)
 cutil_add_test(check_vector check_vector.c)
 cutil_add_test(check_string check_string.c)
+cutil_add_test(check_stack check_stack.c)

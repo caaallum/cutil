@@ -57,7 +57,17 @@ void stack_push(stack_t *s, void *p, int l) {
 }
 
 void *stack_pop(stack_t *s) {
-    
+    assert(s);
+
+    void *src = s->stack[s->total];
+    int size = sizeof(src);
+    void *data = malloc(size);
+    assert(data);
+    memcpy(data, src, size);
+
+    free(src);
+
+    return data;
 }
 
 void *stack_peek(stack_t *s) {
