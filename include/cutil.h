@@ -3,5 +3,7 @@
 
 #include <cutil/map.h>
 #include <cutil/vector.h>
+#include <cutil/string.h>
+#include <cutil/stack.h>
 
 #endif /* __CUTIL_H */
