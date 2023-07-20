@@ -30,7 +30,13 @@ file(GLOB
 
 add_library(${PROJECT_NAME} ${SRC})
 
-target_include_directories(${PROJECT_NAME} PRIVATE include)
+target_include_directories(${PROJECT_NAME} 
+    PRIVATE 
+        include
+    PUBLIC 
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+)
 
 include(CMakePackageConfigHelpers)
 write_basic_package_version_file(
@@ -48,3 +54,4 @@ install(TARGETS ${PROJECT_NAME}
 if(CUTIL_TESTS)
     add_subdirectory(check)
 endif()
+
