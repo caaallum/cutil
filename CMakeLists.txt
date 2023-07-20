@@ -5,7 +5,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 project(cutil)
 
-option(CUTIL_TESTS "Enable testing" ON)
+option(CUTIL_TESTS "Enable testing" OFF)
 
 file(GLOB
     SRC
