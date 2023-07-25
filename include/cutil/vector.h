@@ -27,9 +27,9 @@
 #define V_PP_NARGS_(...) \
     V_EXPAND_(V_NARGS_IMPL_(__VA_ARGS__, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, \
                 5, 4, 3, 2, 1, 0))
-#define V_FOREACH(_vector, _type, _name, _index) \
+#define V_FOREACH(_vector, _type, _name, _index)    \
     _type *_name = (_type *)vector_get(_vector, 0); \
-    for (unsigned int _index = 0; _index < vector_size(_vectir); _name = (_type *)vector_get(_vector, ++_index))
+    for (unsigned int _index = 0; _index < vector_size(_vector); _name = (_type *)vector_get(_vector, ++_index))
 
 typedef struct vector_t vector_t;
 
