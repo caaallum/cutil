@@ -63,16 +63,7 @@ map_val_t *map_val_new(void) {
 }
 
 void map_destroy(map_t *map) {
-  for (int i = 0; i < map->total; i++) {
-    map_val_t *val = map->map[i];
-    if (val->type == TYPE_STRING) {
-      free(val->key.s);
-    }
-    if (val->alloced) {
-      free(val->val);
-    }
-    free(val);
-  }
+    map_clear(map);
   free(map->map);
   free(map);
 }
@@ -80,6 +71,19 @@ void map_destroy(map_t *map) {
 int map_total(const map_t *map) {
   assert(map);
   return map->total;
+}
+
+void map_clear(const map_t *map) {
+    for (int i = 0; i < map->total; i++) {
+        map_val_t *val = map->map[i];
+        if (val->type == TYPE_STRING) {
+          free(val->key.s);
+        }
+        if (val->alloced) {
+          free(val->val);
+        }
+        free(val);
+    }
 }
 
 void _map_resize(map_t *const map) {

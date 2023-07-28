@@ -46,6 +46,13 @@ void map_destroy(map_t *map);
 int map_total(const map_t *map);
 
 /**********************************************************
+ * \brief Clear all items from map
+ *
+ * \param map this
+ **********************************************************/
+void map_clear(const map_t *map);
+
+/**********************************************************
  * \brief Add item to map
  *
  * \param map this
@@ -102,4 +109,5 @@ void *_map_get_key_int(map_t *const map, int key);
 #define map_get_int(map, key) (*((int *)map_get(map, key)))
 #define map_get_string(map, key) ((char *)map_get(map, key))
 #define map_get_struct(type, map, key) ((type *)map_get(map, key))
+
 #endif /* __MAP_H */
