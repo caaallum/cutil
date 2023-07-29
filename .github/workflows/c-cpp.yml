@@ -35,7 +35,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: configure
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=Debug -DCUTIL_TESTS=ON
+      run: cmake -B ${{github.workspace}}/build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCUTIL_TESTS=ON
     - name: build
       run: cmake --build ${{github.workspace}}/build --parallel
     - name: check
@@ -47,6 +47,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: configure
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=Release
+      run: cmake -B ${{github.workspace}}/build -G Ninja -DCMAKE_BUILD_TYPE=Release
     - name: build
       run: cmake --build ${{github.workspace}}/build --parallel
