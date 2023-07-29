@@ -6,19 +6,47 @@ on:
   pull_request:
     branches: [ "master" ]
 
-env:
-  BUILD_TYPE: Release
-
 jobs:
-  build:
-
+  debug_linux:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
     - name: configure
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=Debug -DCUTIL_TESTS=ON
     - name: build
-      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+      run: cmake --build ${{github.workspace}}/build --parallel
     - name: check
       run: cmake --build ${{github.workspace}}/build --target test
+
+  release_linux:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: configure
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=Release
+    - name: build
+      run: cmake --build ${{github.workspace}}/build --parallel
+
+  debug_windows:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: configure
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=Debug -DCUTIL_TESTS=ON
+    - name: build
+      run: cmake --build ${{github.workspace}}/build --parallel
+    - name: check
+      run: cmake --build ${{github.workspace}}/build --target test
+  
+  release_windows:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: configure
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=Release
+    - name: build
+      run: cmake --build ${{github.workspace}}/build --parallel
