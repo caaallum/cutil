@@ -76,7 +76,7 @@ START_TEST(test_vector_foreach) {
         c = 3;
     vector_addv(v, &a, &b, &c);
 
-    V_FOREACH(v, int, obj) {
+    V_FOREACH(v, int, obj, i) {
         switch (i) {
             case 0:
                 ck_assert_int_eq(*obj, a);
