@@ -6,6 +6,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 project(cutil)
 
 option(CUTIL_TESTS "Enable testing" OFF)
+option(CUTIL_DOCS "Build cutil docs" OFF)
 
 file(GLOB
     SRC
@@ -53,5 +54,19 @@ install(TARGETS ${PROJECT_NAME}
 
 if(CUTIL_TESTS)
     add_subdirectory(check)
+endif()
+
+if (CUTIL_DOCS)
+    find_package(Doxygen)
+    set(DOXYGEN_IN ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in)
+    set(DOXYGEN_OUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
+
+    configure_file(${DOXYGEN_IN} ${DOXYGEN_OUT} @ONLY)
+
+    add_custom_target(build-docs ALL
+        COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_OUT}
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+        COMMENT "Generating API documentation with Doxygen"
+        VERBATIM )
 endif()
 
