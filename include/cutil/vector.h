@@ -93,6 +93,14 @@ void vector_pushback(vector_t *vector, void *item, int size);
 void vector_pushbackv_(vector_t *vector, int count, ...);
 
 /**********************************************************
+ * \brief Add string to copy to vector
+ *
+ * \param vector   this
+ * \param str      string to add
+ **********************************************************/
+void vector_push_string(vector_t *vector, const char *str);
+
+/**********************************************************
  * \brief Delete item from vector at givem index
  *
  * \param vector   this

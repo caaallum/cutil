@@ -107,9 +107,26 @@ vector_pushback(vector_t *vector, void *item, int size) {
     }
 
     void *item_ptr = malloc(sizeof(size));
+    assert(item_ptr);
     memcpy(item_ptr, item, size);
 
     vector->items[vector->total++] = item_ptr;
+}
+
+void 
+vector_push_string(vector_t *vector, const char *str) {
+    assert(vector);
+    assert(str);
+
+    if (vector->total == vector->capacity) {
+        vector_resize(vector, vector->capacity * 2);
+    }
+
+    void *item = malloc(sizeof(char) + strlen(str));
+    assert(item);
+    strcpy(item, str);
+
+    vector->items[vector->total++] = item;
 }
 
 void
