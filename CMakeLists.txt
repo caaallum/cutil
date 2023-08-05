@@ -14,6 +14,7 @@ file(GLOB
     src/vector.c
     src/string.c
     src/stack.c
+    src/csv.c
 )
 
 file(GLOB
@@ -27,9 +28,10 @@ file(GLOB
     include/cutil/vector.h
     include/cutil/string.h
     include/cutil/stack.h
+    include/cutil/csv.h
 )
 
-add_library(${PROJECT_NAME} ${SRC})
+add_library(${PROJECT_NAME} ${SRC} ${PRIVATE_HEADERS} ${PUBLIC_HEADERS})
 
 target_include_directories(${PROJECT_NAME} 
     PRIVATE 

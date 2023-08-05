@@ -22,5 +22,6 @@
 #include <cutil/stack.h>
 #include <cutil/string.h>
 #include <cutil/vector.h>
+#include <cutil/csv.h>
 
 #endif /* __CUTIL_H */
