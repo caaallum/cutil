@@ -15,6 +15,7 @@ file(GLOB
     src/string.c
     src/stack.c
     src/csv.c
+    src/linked_list.c
 )
 
 file(GLOB
@@ -29,6 +30,7 @@ file(GLOB
     include/cutil/string.h
     include/cutil/stack.h
     include/cutil/csv.h
+    include/cutil/linked_list.c
 )
 
 add_library(${PROJECT_NAME} ${SRC} ${PRIVATE_HEADERS} ${PUBLIC_HEADERS})
