@@ -1,52 +1,38 @@
-name: C/C++ CI
+name: CMake Build (Cross-Platform)
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ main ]
   pull_request:
-    branches: [ "master" ]
 
 jobs:
-  debug_linux:
-    runs-on: ubuntu-latest
+  build:
+    name: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
 
     steps:
-    - uses: actions/checkout@v3
-    - name: configure
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=Debug -DCUTIL_TESTS=ON
-    - name: build
-      run: cmake --build ${{github.workspace}}/build --parallel
-    - name: check
-      run: cmake --build ${{github.workspace}}/build --target test
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-  release_linux:
-    runs-on: ubuntu-latest
+      - name: Setup CMake
+        uses: lukka/get-cmake@latest
 
-    steps:
-    - uses: actions/checkout@v3
-    - name: configure
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=Release
-    - name: build
-      run: cmake --build ${{github.workspace}}/build --parallel
+      - name: Install Ninja (Windows)
+        if: runner.os == 'Windows'
+        run: choco install ninja
 
-  debug_windows:
-    runs-on: windows-latest
+      - name: Configure CMake
+        run: |
+          cmake -S . -B build \
+          ${{ runner.os == 'Windows' && '-G Ninja' || '' }}
 
-    steps:
-    - uses: actions/checkout@v3
-    - name: configure
-      run: cmake -B ${{github.workspace}}/build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCUTIL_TESTS=ON
-    - name: build
-      run: cmake --build ${{github.workspace}}/build --parallel
-    - name: check
-      run: cmake --build ${{github.workspace}}/build --target test
-  
-  release_windows:
-    runs-on: windows-latest
+      - name: Build
+        run: cmake --build build --config Release
 
-    steps:
-    - uses: actions/checkout@v3
-    - name: configure
-      run: cmake -B ${{github.workspace}}/build -G Ninja -DCMAKE_BUILD_TYPE=Release
-    - name: build
-      run: cmake --build ${{github.workspace}}/build --parallel
+      - name: Run Tests
+        run: ctest --test-dir build --output-on-failure
