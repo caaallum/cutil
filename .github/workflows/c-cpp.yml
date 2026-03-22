@@ -2,7 +2,7 @@ name: CMake Build (Cross-Platform)
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   pull_request:
 
 jobs:
