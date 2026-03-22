@@ -41,7 +41,9 @@ struct map_t {
   int capacity;
 };
 
-map_t *map_new(void) {
+//==========================================================
+map_t *
+map_new(void) {
   map_t *map = malloc(sizeof(map_t));
   assert(map);
 
@@ -53,7 +55,9 @@ map_t *map_new(void) {
   return map;
 }
 
-map_val_t *map_val_new(void) {
+//==========================================================
+map_val_t *
+map_val_new(void) {
   map_val_t *map_val = malloc(sizeof(map_val_t));
   assert(map_val);
 
@@ -62,18 +66,24 @@ map_val_t *map_val_new(void) {
   return map_val;
 }
 
-void map_destroy(map_t *map) {
+//==========================================================
+void 
+map_destroy(map_t *map) {
     map_clear(map);
   free(map->map);
   free(map);
 }
 
-int map_total(const map_t *map) {
+//==========================================================
+int 
+map_total(const map_t *map) {
   assert(map);
   return map->total;
 }
 
-void map_clear(const map_t *map) {
+//==========================================================
+void 
+map_clear(const map_t *map) {
     for (int i = 0; i < map->total; i++) {
         map_val_t *val = map->map[i];
         if (val->type == TYPE_STRING) {
@@ -86,7 +96,9 @@ void map_clear(const map_t *map) {
     }
 }
 
-void _map_resize(map_t *const map) {
+//==========================================================
+static void 
+_map_resize(map_t *const map) {
   if (map->total != map->capacity) {
     return;
   }
@@ -100,7 +112,8 @@ void _map_resize(map_t *const map) {
   map->capacity = capacity;
 }
 
-void _map_add_key_char(map_t *const map, char key, void *val) {
+void 
+_map_add_key_char(map_t *const map, char key, void *val) {
   assert(map);
   map_val_t *map_val = map_val_new();
 
@@ -113,7 +126,9 @@ void _map_add_key_char(map_t *const map, char key, void *val) {
   map->map[map->total++] = map_val;
 }
 
-void _map_add_key_string(map_t *const map, const char *const key, void *val) {
+//==========================================================
+void 
+_map_add_key_string(map_t *const map, const char *const key, void *val) {
   assert(map);
   map_val_t *map_val = map_val_new();
 
@@ -129,7 +144,9 @@ void _map_add_key_string(map_t *const map, const char *const key, void *val) {
   map->map[map->total++] = map_val;
 }
 
-void _map_add_key_int(map_t *const map, int key, void *val) {
+//==========================================================
+void 
+_map_add_key_int(map_t *const map, int key, void *val) {
   assert(map);
   map_val_t *map_val = map_val_new();
 
@@ -142,7 +159,9 @@ void _map_add_key_int(map_t *const map, int key, void *val) {
   map->map[map->total++] = map_val;
 }
 
-void _map_pushback_key_char(map_t *const map, char key, void *val, int size) {
+//==========================================================
+void 
+_map_pushback_key_char(map_t *const map, char key, void *val, int size) {
   assert(map);
   assert(val);
   assert(size > 0);
@@ -161,7 +180,9 @@ void _map_pushback_key_char(map_t *const map, char key, void *val, int size) {
   map->map[map->total++] = map_val;
 }
 
-void _map_pushback_key_string(map_t *const map, const char *const key,
+//==========================================================
+void 
+_map_pushback_key_string(map_t *const map, const char *const key,
                               void *val, int size) {
   assert(map);
   assert(val);
@@ -184,7 +205,9 @@ void _map_pushback_key_string(map_t *const map, const char *const key,
   map->map[map->total++] = map_val;
 }
 
-void _map_pushback_key_int(map_t *const map, int key, void *val, int size) {
+//==========================================================
+void 
+_map_pushback_key_int(map_t *const map, int key, void *val, int size) {
   assert(map);
   assert(val);
   assert(size > 0);
@@ -204,7 +227,9 @@ void _map_pushback_key_int(map_t *const map, int key, void *val, int size) {
   map->map[map->total++] = map_val;
 }
 
-void *_map_get_key_char(map_t *const map, char key) {
+//==========================================================
+void *
+_map_get_key_char(map_t *const map, char key) {
   assert(map);
 
   for (int i = 0; i < map->total; i++) {
@@ -221,7 +246,9 @@ void *_map_get_key_char(map_t *const map, char key) {
   return NULL;
 }
 
-void *_map_get_key_string(map_t *const map, const char *const key) {
+//==========================================================
+void *
+_map_get_key_string(map_t *const map, const char *const key) {
   assert(map);
 
   for (int i = 0; i < map->total; i++) {
@@ -238,7 +265,9 @@ void *_map_get_key_string(map_t *const map, const char *const key) {
   return NULL;
 }
 
-void *_map_get_key_int(map_t *const map, int key) {
+//==========================================================
+void *
+_map_get_key_int(map_t *const map, int key) {
   assert(map);
 
   for (int i = 0; i < map->total; i++) {

@@ -29,7 +29,9 @@ struct _stack_t {
     int capacity;
 };
 
-stack_t *stack_new(void) {
+//==========================================================
+stack_t *
+stack_new(void) {
     stack_t *s = malloc(sizeof(stack_t));
     assert(s);
     
@@ -41,13 +43,17 @@ stack_t *stack_new(void) {
     return s;
 }
 
-int stack_size(stack_t *s) {
+//==========================================================
+int 
+stack_size(stack_t *s) {
     assert(s);
 
     return s->total;
 }
 
-void _stack_resize(stack_t *s) {
+//==========================================================
+static void 
+_stack_resize(stack_t *s) {
     if (s->total != s->capacity) {
     return;
     }
@@ -61,7 +67,9 @@ void _stack_resize(stack_t *s) {
     s->capacity = capacity;
 }
 
-void stack_push(stack_t *s, void *p, int l) {
+//==========================================================
+void 
+stack_push(stack_t *s, void *p, int l) {
     assert(s);
     assert(p);
     assert(s > 0);
@@ -73,7 +81,9 @@ void stack_push(stack_t *s, void *p, int l) {
     s->stack[s->total++] = data;
 }
 
-void *stack_pop(stack_t *s) {
+//==========================================================
+void *
+stack_pop(stack_t *s) {
     assert(s);
 
     void *src = s->stack[s->total];
@@ -87,12 +97,16 @@ void *stack_pop(stack_t *s) {
     return data;
 }
 
-void *stack_peek(stack_t *s) {
+//==========================================================
+void *
+stack_peek(stack_t *s) {
     assert(s);
     return s->stack[s->total];
 }
 
-void stack_destroy(stack_t *s) {
+//==========================================================
+void 
+stack_destroy(stack_t *s) {
     for (int i = 0; i < s->total; i++) {
         free(s->stack[i]);
     }

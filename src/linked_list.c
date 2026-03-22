@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <assert.h>
 
+//==========================================================
 node_t *
 linkedlist_new(void *val) {
     node_t *head = malloc(sizeof(node_t));
@@ -13,6 +14,7 @@ linkedlist_new(void *val) {
     return head;
 }
 
+//==========================================================
 void
 linkedlist_push(node_t *head, void *val) {
     node_t *current = head;

@@ -20,6 +20,7 @@
 #include <assert.h>
 #include <string.h>
 
+ //==========================================================
 string_t *
 string_new(const char *str) {
     string_t *s = malloc(sizeof(string_t));
@@ -35,6 +36,7 @@ string_new(const char *str) {
     return s;
 }
 
+//==========================================================
 void
 string_append(string_t *s, const char *str) {
     s->length += strlen(str);
@@ -46,19 +48,25 @@ string_append(string_t *s, const char *str) {
     s->str = new_str;
 }
 
+//==========================================================
 void
 string_prepend(string_t *s, const char *str) {
+    assert(str);
+    assert(s);
     s->length += strlen(str);
     char *new_str = malloc(s->length);
+    assert(new_str);
+
     strcpy(new_str, str);
-    strcat(new_str, s->str);
+    strcat(new_str, s->str); 
 
     free(s->str);
     s->str = new_str;
 }
 
-
-void string_destroy(string_t *s) {
+//==========================================================
+void 
+string_destroy(string_t *s) {
     free(s->str);
     free(s);
 }

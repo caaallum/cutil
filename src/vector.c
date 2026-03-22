@@ -30,6 +30,7 @@ struct vector_t {
     int total;
 };
 
+//==========================================================
 vector_t *
 vector_new(void) {
     vector_t *vector = malloc(sizeof(vector_t));
@@ -43,6 +44,7 @@ vector_new(void) {
     return vector;
 }
 
+//==========================================================
 void
 vector_destroy(vector_t *vector) {
     assert(vector);
@@ -51,12 +53,14 @@ vector_destroy(vector_t *vector) {
     free(vector);
 }
 
+//==========================================================
 int
 vector_size(vector_t *vector) {
     assert(vector);
     return vector->total;
 }
 
+//==========================================================
 void
 vector_resize(vector_t *vector, int capacity) {
     void **items = realloc(vector->items, sizeof(void *) * capacity);
@@ -66,6 +70,7 @@ vector_resize(vector_t *vector, int capacity) {
     vector->capacity = capacity;
 }
 
+//==========================================================
 void
 vector_add(vector_t *vector, void *item) {
     assert(vector);
@@ -78,6 +83,7 @@ vector_add(vector_t *vector, void *item) {
     vector->items[vector->total++] = item;
 }
 
+//==========================================================
 void
 vector_addv_(vector_t *vector, int count, ...) {
     assert(vector);
@@ -96,6 +102,7 @@ vector_addv_(vector_t *vector, int count, ...) {
     va_end(args);
 }
 
+//==========================================================
 void
 vector_pushback(vector_t *vector, void *item, int size) {
     assert(vector);
@@ -113,7 +120,8 @@ vector_pushback(vector_t *vector, void *item, int size) {
     vector->items[vector->total++] = item_ptr;
 }
 
-void 
+//==========================================================
+void
 vector_push_string(vector_t *vector, const char *str) {
     assert(vector);
     assert(str);
@@ -129,6 +137,7 @@ vector_push_string(vector_t *vector, const char *str) {
     vector->items[vector->total++] = item;
 }
 
+//==========================================================
 void
 vector_delete(vector_t *vector, int index) {
     assert(vector);
@@ -150,6 +159,7 @@ vector_delete(vector_t *vector, int index) {
     }
 }
 
+//==========================================================
 void *
 vector_get(vector_t *vector, int index) {
     assert(vector);

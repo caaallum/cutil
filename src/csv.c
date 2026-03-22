@@ -22,7 +22,8 @@
 #include <stdio.h>
 #include <assert.h>
 
-static int 
+ //==========================================================
+static int
 csv_parser_is_deliter_accepted(const char *delimiter) {
     char d = *delimiter;
     switch (d) {
@@ -35,6 +36,7 @@ csv_parser_is_deliter_accepted(const char *delimiter) {
     return 1;
 }
 
+//==========================================================
 vector_t*
 csv_parser_get_row(FILE* file, char delimiter) {
     int accepted_chars = 64;
@@ -108,6 +110,7 @@ csv_parser_get_row(FILE* file, char delimiter) {
     }
 }
 
+//==========================================================
 int
 csv_parser_parse(csv_parser_t* parser, const char* file, char delimeter, int has_header) {
     if (!csv_parser_is_deliter_accepted) {
@@ -136,6 +139,7 @@ csv_parser_parse(csv_parser_t* parser, const char* file, char delimeter, int has
     return CSV_SUCCESS;
 }
 
+//==========================================================
 void
 csv_parser_destroy(csv_parser_t parser) {
     assert(parser);
